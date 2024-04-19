@@ -184,7 +184,7 @@ namespace PnnQuant
 				quan_rt = -1;
 			
 			weight = Math.Min(0.9, nMaxColors * 1.0 / maxbins);
-			if (weight > .0015 && weight < .002)
+			if (weight > .0015 && weight < .0022)
 				quan_rt = 2;
 			if (weight < .04 && PG < 1 && PG >= coeffs[0, 1]) {
 				var delta = Math.Exp(1.75) * weight;
