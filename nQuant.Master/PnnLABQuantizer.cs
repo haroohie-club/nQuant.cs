@@ -184,8 +184,8 @@ namespace PnnQuant
 				quan_rt = -1;
 			
 			weight = Math.Min(0.9, nMaxColors * 1.0 / maxbins);
-			if (weight < .001 || (weight > .0015 && weight < .0022))
-				quan_rt = 2;
+            if (nMaxColors < 16 || (weight > .0015 && weight < .0022))
+                quan_rt = 2;
 			if (weight < .04 && PG < 1 && PG >= coeffs[0, 1]) {
 				var delta = Math.Exp(1.75) * weight;
 				PG -= delta;
@@ -193,8 +193,13 @@ namespace PnnQuant
 				if (nMaxColors >= 64)
 					quan_rt = 0;
 			}
+            if (nMaxColors < 64) {
+                var weightB = nMaxColors / 8000.0;
+                if (Math.Abs(weightB - weight) < .001)
+                    quan_rt = 2;
+            }
 
-			if (pixelMap.Count <= nMaxColors)
+            if (pixelMap.Count <= nMaxColors)
 			{
 				/* Fill palette */
 				palettes = new Color[pixelMap.Count];
