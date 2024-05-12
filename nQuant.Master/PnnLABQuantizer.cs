@@ -193,13 +193,13 @@ namespace PnnQuant
 				if (nMaxColors >= 64)
 					quan_rt = 0;
 			}
-            if (nMaxColors < 64) {
-                var weightB = nMaxColors / 8000.0;
-                if (Math.Abs(weightB - weight) < .001)
-                    quan_rt = 2;
-            }
+			if (nMaxColors > 16 && nMaxColors < 64) {
+				var weightB = nMaxColors / 8000.0;
+				if (Math.Abs(weightB - weight) < .001)
+					quan_rt = 2;
+			}
 
-            if (pixelMap.Count <= nMaxColors)
+			if (pixelMap.Count <= nMaxColors)
 			{
 				/* Fill palette */
 				palettes = new Color[pixelMap.Count];
