@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 
 /* Generalized Hilbert ("gilbert") space-filling curve for rectangular domains of arbitrary (non-power of two) sizes.
 Copyright (c) 2021 - 2023 Miller Cy Chan
@@ -121,7 +120,7 @@ namespace nQuant.Master
 					lookup[offset] = ditherable.DitherColorIndex(palette, c2.ToArgb(), bidx) + 1;
 				qPixels[bidx] = lookup[offset] - 1;
 				
-				if(saliencies != null && CIELABConvertor.Y_Diff(pixel, c2) > palette.Length - margin) {
+				if(saliencies != null && CIELABConvertor.Y_Diff(pixel, c2) > Math.Max(1, palette.Length - margin)) {
 					var strength = 1 / 3f;
 					c2 = BlueNoise.Diffuse(pixel, palette[qPixels[bidx]], 1 / saliencies[bidx], strength, x, y);
 					qPixels[bidx] = ditherable.DitherColorIndex(palette, c2.ToArgb(), bidx);
