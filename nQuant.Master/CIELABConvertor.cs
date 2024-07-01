@@ -203,7 +203,7 @@ namespace nQuant.Master
 				Math.Pow(deltaH_prime_div_k_L_S_L, 2.0) +
 				deltaR_T);
 		}
-		
+
 		internal static double Y_Diff(Color c1, Color c2)
 		{
 			Func<Color, double> color2Y = c => {
@@ -216,6 +216,17 @@ namespace nQuant.Master
 			var y = color2Y(c1);
 			var y2 = color2Y(c2);
 			return Math.Abs(y2 - y) * XYZ_WHITE_REFERENCE_Y;
+		}
+
+		internal static double U_Diff(Color c1, Color c2)
+		{
+			Func<Color, double> color2U = c => {
+				return -0.09991 * c.R - 0.33609 * c.G + 0.436 * c.B;
+			};
+
+			var u = color2U(c1);
+			var u2 = color2U(c2);
+			return Math.Abs(u2 - u);
 		}
 	}
 }
