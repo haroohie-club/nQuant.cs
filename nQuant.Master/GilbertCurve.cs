@@ -79,7 +79,7 @@ namespace nQuant.Master
 			int density = palette.Length > 16 ? 3200 : 1500;
 			if (palette.Length / weight > 5000 && (weight > .045 || (weight > .01 && palette.Length <= 64)))
 				ditherMax = (byte) BitmapUtilities.Sqr(5 + edge);
-			else if (DITHER_MAX > 9 && palette.Length / weight < density && palette.Length >= 16 && palette.Length < 256)
+			else if (weight < .03 && palette.Length / weight < density && palette.Length >= 16 && palette.Length < 256)
 				ditherMax = (byte) BitmapUtilities.Sqr(5 + edge);
 			thresold = DITHER_MAX > 9 ? -112 : -64;
 			weights = new float[0];
